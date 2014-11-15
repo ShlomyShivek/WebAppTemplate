@@ -1,0 +1,27 @@
+This is an AngularJS web application template. It is a single page application that can load different templates on the same
+page.
+The template uses the following open source free components:
+ 1. AngularJS
+ 2. RequireJS - http://requirejs.org/
+ 3. jQuery
+ 4. Bootstrap - http://getbootstrap.com/
+
+How to add new template:
+~~~~~~~~~~~~~~~~~~~~~~~~
+    1. Create new template html file under the templates folder. This is the user interface that will interact with
+       the controller.
+    2. Create new controller js file for the template under the controllers folder.
+    3. Update the routes.js file to redirect the application to your template for sepcific url.
+
+
+
+HTTP Server installation
+~~~~~~~~~~~~~~~~~~~~~~~~
+Require http server. Quick and easy server is http-server that can be installed from the npm:
+https://www.npmjs.org/package/http-server
+
+    1. From the command line install the server globally: npm install http-server -g
+    2. From the command line go to the index.html folder and execute the server from there using the following
+        command line: http-server
+    3. The server uses port 8080 as default
+    4. Open the browser to: http://localhost:8080/index.html
