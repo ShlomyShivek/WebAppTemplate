@@ -1,10 +1,12 @@
 This is an AngularJS web application template. It is a single page application that can load different templates on the same
 page.
 The template uses the following open source free components:
- 1. AngularJS
- 2. RequireJS - http://requirejs.org/
- 3. jQuery
- 4. Bootstrap - http://getbootstrap.com/
+    1. AngularJS
+    2. RequireJS - http://requirejs.org/
+    3. jQuery
+    4. Bootstrap - http://getbootstrap.com/
+    5. nodeJS - http://nodejs.org/
+    6. nodemon - http://nodemon.io/
 
 How to add new template:
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -14,9 +16,42 @@ How to add new template:
     3. Update the routes.js file to redirect the application to your template for sepcific url.
 
 
+nodeJS
+~~~~~~
+    1. nodeJS is the server being used by this application template.
+    2. The main server file is server.js. This is the server's main entry code.
+    3. The server serves both static files requests from the app folder and REST API requests.
+    4. The package.json file contains all the dependency packages required for the server. The npm installer reads
+        this file and automatically installs all required components.
+    5. nodeJS by itself doesn't monitor changes to server files. For that you have to install the nodemon package
+        by running the following command from the command line: npm install -g nodemon
+        5.1 After installing it, run the server from the server.js folder using the following command: nodemon
+        5.2 It will automatically find and start the server.js file
+
+How to add new API service
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The API service is handlers based. Which mean that each call to the API is handled by a handler. A handler is a
+javascript file that is implementing the logic of the call.
+When the server starts it loads all the handlers to the node router so it will know which handler to call in return to
+an API request.
+
+    1. Define the API you want to implement and the URL that will call it.
+    2. Create a new handler under the serviceLogic folder that implements the logic of the API call
+        2.1 Each handler should export the following:
+            2.1.1. handlerName - a unique name for the handler (uniqueness is currently not enforced) that will be used
+            for identifying the handler in the log
+            2.1.2. handleRequest - method that will get the request and update the response when a call is made
+    3. Register your handler in the server.js file.
+        3.1. The handlers array is a multi-dimension array. It has an array for each http verb (GET, POST, UPDATE,
+        DELETE).
+        3.2. Add your handler to the correct verb with specifying the URL call for this handler
+            3.2.1. Adding the handler is done by creating new requestHandlerData object that contains the information
+            about the handler.
+    4. That's it. The server takes care of registering all handlers in the routes configuration
 
 HTTP Server installation
-~~~~~~~~~~~~~~~~~~~~~~~~
+    - alternative way for serving static pages with node. There is no need to use it in this application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Require http server. Quick and easy server is http-server that can be installed from the npm:
 https://www.npmjs.org/package/http-server
 
