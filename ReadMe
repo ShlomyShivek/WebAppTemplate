@@ -1,5 +1,6 @@
-This is an AngularJS web application template. It is a single page application that can load different templates on the same
-page.
+This is an AngularJS web application template. It is a single page application that can load different templates
+on the same page.
+
 The template uses the following open source free components:
     1. AngularJS
     2. RequireJS - http://requirejs.org/
@@ -7,6 +8,11 @@ The template uses the following open source free components:
     4. Bootstrap - http://getbootstrap.com/
     5. nodeJS - http://nodejs.org/
     6. nodemon - http://nodemon.io/
+    7. mongoose - http://mongoosejs.com/
+
+Credit: this template was built with the inspiration of
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4
 
 How to add new template:
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,16 +44,27 @@ an API request.
     1. Define the API you want to implement and the URL that will call it.
     2. Create a new handler under the serviceLogic folder that implements the logic of the API call
         2.1 Each handler should export the following:
-            2.1.1. handlerName - a unique name for the handler (uniqueness is currently not enforced) that will be used
-            for identifying the handler in the log
-            2.1.2. handleRequest - method that will get the request and update the response when a call is made
-    3. Register your handler in the server.js file.
-        3.1. The handlers array is a multi-dimension array. It has an array for each http verb (GET, POST, UPDATE,
-        DELETE).
-        3.2. Add your handler to the correct verb with specifying the URL call for this handler
-            3.2.1. Adding the handler is done by creating new requestHandlerData object that contains the information
-            about the handler.
+            2.1.1. path - the URL path of the api (relative to the base path which is defined in the
+            httpListener.js file).
+            2.1.2. verb - the http VERB to be used with this call
+            2.1.3. handleRequest - method that will get the request and update the response when a call is made
+    3. On startup, the server scans all files under the handlers folder and automatically add them to the node router.
     4. That's it. The server takes care of registering all handlers in the routes configuration
+
+
+How to create and use DB model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When server starts it will automatically scan all files under the model/dbmodels folder and register them with
+mongoose. In order to create new db model just create another file under that folder with the schema exported by the
+module. Use the appActivityLog.js file as a reference.
+
+To use the model that you created, call the getDbModel function of the dbModelsInitiator type with the name of the
+model you just created (same as the file name).
+For example:
+
+    var appActivityModel = require('../dbModelsInitiator').getDbModel('appActivityLog');
+    var activity = new appActivityModel({date:'01/01/01', activity:'Application Started'});
+
 
 HTTP Server installation
     - alternative way for serving static pages with node. There is no need to use it in this application

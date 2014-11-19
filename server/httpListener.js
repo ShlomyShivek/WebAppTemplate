@@ -1,6 +1,4 @@
 
-//var express = require('express');
-//var app = express();
 exports.express = require('express'); // call express
 exports.app=this.express(); // define our app using express
 

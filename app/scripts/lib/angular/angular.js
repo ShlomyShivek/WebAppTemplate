@@ -2327,7 +2327,7 @@
      * ## Inference
      *
      * In JavaScript calling `toString()` on a function returns the function definition. The definition can then be
-     * parsed and the function arguments can be extracted. *NOTE:* This does not work with minification, and obfuscation
+     * parsed and the function arguments can be getDbModel. *NOTE:* This does not work with minification, and obfuscation
      * tools since these tools change the argument names.
      *
      * ## `$inject` Annotation
@@ -4604,7 +4604,7 @@
              * @description
              * `$controller` service is responsible for instantiating controllers.
              *
-             * It's just simple call to {@link AUTO.$injector $injector}, but extracted into
+             * It's just simple call to {@link AUTO.$injector $injector}, but getDbModel into
              * a service, so that one can override this service with {@link https://gist.github.com/1649788
              * BC version}.
              */
@@ -6872,7 +6872,7 @@
          *
          *      If `redirectTo` is a function, it will be called with the following parameters:
          *
-         *      - `{Object.<string>}` - route parameters extracted from the current
+         *      - `{Object.<string>}` - route parameters getDbModel from the current
          *        `$location.path()` by applying the current route templateUrl.
          *      - `{string}` - current `$location.path()`
          *      - `{Object}` - current `$location.search()`
@@ -7278,7 +7278,7 @@
      * @description
      * Current set of route parameters. The route parameters are a combination of the
      * {@link ng.$location $location} `search()`, and `path()`. The `path` parameters
-     * are extracted when the {@link ng.$route $route} path is matched.
+     * are getDbModel when the {@link ng.$route $route} path is matched.
      *
      * In case of parameter name collision, `path` params take precedence over `search` params.
      *
