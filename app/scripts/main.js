@@ -1,5 +1,3 @@
-//http://blog.inlineblock.com/blog/2013/06/06/using-requirejs-with-angular/
-
 'use strict';
 
 require.config({
@@ -8,8 +6,8 @@ require.config({
         text:'lib/require/text',
         jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
         jqueryUI: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
-        jqueryCookie: 'lib/jquery/jquery.cookie.js',
-        wizard: 'lib/jwizard/jquery.jWizard.min.js',
+        jqueryCookie: 'lib/jquery/jquery.cookie',
+        wizard: 'lib/jwizard/jquery.jWizard.min',
         angular: 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min',
         ngRoute: 'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-route.min',
         bootstrap: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min'
