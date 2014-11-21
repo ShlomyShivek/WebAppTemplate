@@ -4,17 +4,6 @@ var httpListener = require('./httpListener');
 var apiRoutuer = require('./router');
 var applicationActivityService = require('./services/applicationActivityService');
 
-// ROUTES FOR OUR API
-// =============================================================================
-var router = httpListener.express.Router();
-apiRoutuer.initRoutes(router);
-httpListener.init();
-
-//starts the REST API
-httpListener.startRestApi(router);
-
-//starts the static files server
-httpListener.startStaticFilesServer();
 
 //INIT THE DAL
 // =============================================================================
@@ -31,6 +20,21 @@ db.once('open', function callback () {
 });
 
 mongoose.connect('mongodb://localhost/test');
+
+
+// ROUTES FOR OUR API
+// =============================================================================
+var router = httpListener.express.Router();
+apiRoutuer.initRoutes(router);
+httpListener.init();
+
+//starts the REST API
+httpListener.startRestApi(router);
+
+//starts the static files server
+httpListener.startStaticFilesServer();
+
+
 
 // START THE SERVER
 // =============================================================================
