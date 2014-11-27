@@ -9,6 +9,7 @@ The template uses the following open source free components:
     5. nodeJS - http://nodejs.org/
     6. nodemon - http://nodemon.io/
     7. mongoose - http://mongoosejs.com/
+    8. recursive-readdir - https://www.npmjs.org/package/recursive-readdir
 
 Credit: this template was built with the inspiration of
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
