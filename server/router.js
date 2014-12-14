@@ -11,7 +11,7 @@ exports.initRoutes=function(router) {
 
         var l = handlersFiles.length;
         for (var i = 0; i < l; i++) {
-            var handler = require('./' + handlersFiles[i]);
+            var handler = require(process.cwd() + '/' + handlersFiles[i]);
 
             if (handler.verb == 'GET') {
                 console.log("Adding GET router for: " + handlersFiles[i] +' for URL:' + handler.path);

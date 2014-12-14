@@ -6,6 +6,9 @@ exports.verb='GET';
 
 //handler business logic
 exports.handleRequest=function(req, res){
+
+    console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
+
     var fs = require('fs');
     var fileContent = fs.readFileSync('..\\ReadMe', 'utf8');
     res.json({ message: fileContent });

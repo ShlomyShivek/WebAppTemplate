@@ -1,11 +1,12 @@
 exports.initialize = function() {
 
     var fs = require('fs');
-    var dbmodelsBasePath = './models/dbmodels/';
+    var dbmodelsBasePath = process.cwd()+'/models/dbmodels/';
     var modelFiles = fs.readdirSync(dbmodelsBasePath);
 
     var l = modelFiles.length;
     for (var i = 0; i < l; i++) {
+        console.log('require:' + modelFiles[i]);
         require(dbmodelsBasePath+ modelFiles[i])();
     }
 };

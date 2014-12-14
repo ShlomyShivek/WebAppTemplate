@@ -15,7 +15,13 @@ Credit: this template was built with the inspiration of
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4
 
-How to add new template:
+How to debug the server
+~~~~~~~~~~~~~~~~~~~~~~~
+So far the best way I found to debug the server is using node-inspector https://github.com/node-inspector/node-inspector
+Install node-inspector using the following npm command line: npm -global node-debug
+Run the server with the following command line: node-debug server.js
+
+How to add new html template:
 ~~~~~~~~~~~~~~~~~~~~~~~~
     1. Create new template html file under the templates folder. This is the user interface that will interact with
        the controller.

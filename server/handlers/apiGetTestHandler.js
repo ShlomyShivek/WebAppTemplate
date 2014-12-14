@@ -5,5 +5,8 @@ exports.path='/';
 exports.verb='GET';
 
 exports.handleRequest=function(req, res){
+
+    console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
+
     res.json({ message: 'hooray! welcome to our api!!!!!' });
 }
