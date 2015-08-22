@@ -1,3 +1,4 @@
+
 This is an AngularJS web application template. It is a single page application that can load different templates
 on the same page.
 
@@ -82,5 +83,5 @@ https://www.npmjs.org/package/http-server
     1. From the command line install the server globally: npm install http-server -g
     2. From the command line go to the index.html folder and execute the server from there using the following
         command line: http-server
-    3. The server uses port 8080 as default
-    4. Open the browser to: http://localhost:8080/index.html
+    3. The server uses port 8081 as default
+    4. Open the browser to: http://localhost:8081/index.html

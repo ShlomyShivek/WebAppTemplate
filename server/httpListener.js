@@ -35,7 +35,7 @@ exports.init=function(){
 }
 
 exports.startStaticFilesServer = function() {
-    var appFolder = __dirname + '\\..\\app';
+    var appFolder = __dirname + '/../app';
 
     console.log('starting file server on:' + appFolder);
     this.app.use(this.express.static(appFolder));
