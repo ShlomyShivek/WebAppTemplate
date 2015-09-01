@@ -18,9 +18,23 @@ http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express
 
 How to debug the server
 ~~~~~~~~~~~~~~~~~~~~~~~
-So far the best way I found to debug the server is using node-inspector https://github.com/node-inspector/node-inspector
+So far I found two easy ways to debug the application.
+The first uses a node-inspector package that let you debug the application form the browser:
+https://github.com/node-inspector/node-inspector
 Install node-inspector using the following npm command line: npm -global node-debug
 Run the server with the following command line: node-debug server.js
+
+The second (and better in my opinion) way is to launch the nodejs in debug mode which listens to specific port
+and connect the WebStorm debugger to that port. This allows you to debug the application from the WebStorm IDE.
+Basically just run the server with the following command line:
+nodemon --harmony --debug-brk=5858
+Notes:
+    1. nodemon can be replaced with just node
+    2. --harmony is for using ES6 script
+The debug-brk=5858 tells nodejs to listen for debug session on port 5858.
+Now you need to create new NodeJs remote debug configuration in WebStorm and configure it to connect to that port (5858)
+More details can be found at: https://www.jetbrains.com/webstorm/help/running-and-debugging-node-js.html
+
 
 How to add new html template:
 ~~~~~~~~~~~~~~~~~~~~~~~~

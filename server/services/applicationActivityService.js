@@ -1,5 +1,5 @@
 exports.applicationStarted=function(){
-    var appActivityModel = require('../dbModelsInitiator').getDbModel('appActivityLog');
+    var appActivityModel = require('dbModelsInitiator').getDbModel('appActivityLog');
     var activity = new appActivityModel({date:'01/01/01', activity:'Application Started'});
     activity.save(function (err, model) {
         if (err) {

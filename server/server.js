@@ -1,5 +1,8 @@
 // server.js
 
+//this package allow to use direct path for require script files (instead of relative paths)
+require('app-module-path').addPath(__dirname);
+
 var httpListener = require('./httpListener');
 var apiRoutuer = require('./router');
 var applicationActivityService = require('./services/applicationActivityService');

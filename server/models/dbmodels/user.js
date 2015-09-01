@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var crypto = require('crypto');
 
 function registerModel(appData) {
     var path = require('path');
@@ -15,14 +16,6 @@ function registerModel(appData) {
 var validateLocalStrategyProperty = function(property) {
     return ((this.provider !== 'local' && !this.updated) || property.length);
 };
-
-/**
- * A Validation function for local strategy password
- */
-var validateLocalStrategyPassword = function(password) {
-    return (this.provider !== 'local' || (password && password.length > 6));
-};
-
 
 
 module.exports = function() {
@@ -50,26 +43,6 @@ module.exports = function() {
             validate: [validateLocalStrategyProperty, 'Please fill in your email'],
             match: [/.+\@.+\..+/, 'Please fill a valid email address']
         },
-        username: {
-            type: String,
-            unique: 'testing error message',
-            required: 'Please fill in a username',
-            trim: true
-        },
-        password: {
-            type: String,
-            default: '',
-            validate: [validateLocalStrategyPassword, 'Password should be longer']
-        },
-        salt: {
-            type: String
-        },
-        provider: {
-            type: String,
-            required: 'Provider is required'
-        },
-        providerData: {},
-        additionalProvidersData: {},
         roles: {
             type: [{
                 type: String,
@@ -84,42 +57,18 @@ module.exports = function() {
             type: Date,
             default: Date.now
         },
-        /* For reset password */
-        resetPasswordToken: {
-            type: String
-        },
-        resetPasswordExpires: {
-            type: Date
-        }
     });
-
-    user.methods.isUserNameValid= function () {
-        "use strict";
-        //TODO: implement username validation logic
-      return true;
-    };
-
-    user.methods.isPasswordValid=function(){
-        "use strict";
-        //TODO: implement password validation logic
-        return true;
-    }
 
     user.methods.isValid=function(){
         "use strict";
-
-        let result=false;
-        if(this.isUserNameValid() && this.isPasswordValid()){
-            result=true;
-        }
-
-        return result;
+        //ToDo: add some logic here
+        return true;
     };
 
-    user.methods.toString=function(){
-        return this.username;
-    }
 
+    user.methods.toString=function(){
+        return this.firstName+" "+this.lastName+" "+this.email;
+    }
     registerModel(user);
 };
 
