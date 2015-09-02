@@ -8,7 +8,8 @@ exports.path='/signup';
 
 
 //handler business logic
-  exports.handleRequest=function(req, res){
+  exports.handleRequest=[handler];
+function handler(req, res){
 
       console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
 
@@ -38,7 +39,7 @@ exports.path='/signup';
                   if (data == errorCodes.ServicesErrorCodes.DuplicateKey) {
                       res.status(400).json(errorCodes.toJson(errorCodes.ApiErrorCodes.UserAlreadyExists,'user already registered'));
                   } else {
-                      res.status(400).json(errorCodes.toJson(errorCodes.ApiErrorCodes.UnknownError,'unknown error occurred.'));
+                      res.status(400).json(errorCodes.toJson(errorCodes.ApiErrorCodes.UnknownError,'unknown error occurred'));
                   }
               });
           }

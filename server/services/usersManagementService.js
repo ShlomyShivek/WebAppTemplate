@@ -1,6 +1,8 @@
 "use strict";
 
 exports.login=function(credentials, onSuccess, onFailure){
+    let passportModule=require('passport');
+    passportModule.authenticate('local')
     onSuccess();
 }
 
@@ -23,18 +25,25 @@ exports.signup=function(userModel, authModel, onSuccess, onFailure){
                 authModel.provider="usernameProvider";
                 authModel.save(function(err,model) {
                     if (err){
+                        console.log("failed to save credentials details: %s", err);
                         if(err.errors.password){
                             console.log("invalid password");
                         }
-                        console.log("failed to save user: %s", err);
                         onFailure(errorCodes.ServicesErrorCodes.UnknownError);
                     }else{
+                        console.log("credentials stored successfully");
+                        userModel.authenticationKey=authModel._id;
                         userModel.save(function(err,model){
                             if(err){
-                                console.log(err);
+                                console.log("failed to save user details in DB: %s", err);
+                                console.log("performing rollback for authentication details for user %s",authModel.username);
                                 authCollection.remove({username:authModel.username}, function(err){
-                                    //failed to remove user
-                                    console.log("failed to remove user from authentication collection: %s",err);
+                                    if(err) {
+                                        //failed to remove user
+                                        console.log("failed to remove user from authentication collection: %s", err);
+                                        onFailure(errorCodes.ServicesErrorCodes.UnknownError);
+                                    }
+                                    onFailure(errorCodes.ServicesErrorCodes.UnknownError);
                                 });
                             }else{
                                 console.log("user registered succesfully into DB: %s",model);

@@ -17,9 +17,18 @@ var validateLocalStrategyProperty = function(property) {
     return ((this.provider !== 'local' && !this.updated) || property.length);
 };
 
+var validateAuthenticationKey=function(key){
+    return key!=null;
+}
+
 
 module.exports = function() {
     var user = new Schema({
+        authenticationKey:{
+            type:Schema.Types.ObjectId, //ToDo: create FK to authentication collection. DElete users collection and set the index to be unique on this
+            validate:[validateAuthenticationKey,'Missing reference to authentication collection'],
+            index: { unique: true }
+        },
         firstName: {
             type: String,
             trim: true,

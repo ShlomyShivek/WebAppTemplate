@@ -3,9 +3,9 @@
 //this package allow to use direct path for require script files (instead of relative paths)
 require('app-module-path').addPath(__dirname);
 
-var httpListener = require('./httpListener');
-var apiRoutuer = require('./router');
-var applicationActivityService = require('./services/applicationActivityService');
+var httpListener = require('httpListener');
+
+var applicationActivityService = require('services/applicationActivityService');
 
 
 //INIT THE DAL
@@ -13,7 +13,7 @@ var applicationActivityService = require('./services/applicationActivityService'
 var mongoose = require('mongoose');
 
 //initialize the data model
-require('./dbModelsInitiator').initialize();
+require('dbModelsInitiator').initialize();
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -25,17 +25,37 @@ db.once('open', function callback () {
 mongoose.connect('mongodb://localhost/test');
 
 
-// ROUTES FOR OUR API
+// EXPRESS AND ROUTES INITIALIZATION
 // =============================================================================
-var router = httpListener.express.Router();
-apiRoutuer.initRoutes(router);
-httpListener.init();
+var expressRouter = httpListener.express.Router();
+var apiRoutuer = require('router');
+apiRoutuer.initRoutes(expressRouter);
+
+//init static files listener
+httpListener.initStaticFilesListener();
+
+//init cookies parser
+httpListener.initCookiesParser();
+
+//init body parser
+httpListener.initBodyParser();
+
+//init sessions
+httpListener.initSessions();
+
+//init passport to express
+httpListener.initPassport();
+
+//init headers
+httpListener.initHeaders();
 
 //starts the REST API
-httpListener.startRestApi(router);
+httpListener.startRestApi(expressRouter);
 
-//starts the static files server
-httpListener.startStaticFilesServer();
+
+
+
+
 
 
 

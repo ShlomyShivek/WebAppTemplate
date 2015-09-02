@@ -5,7 +5,9 @@ exports.path='/readme';
 exports.verb='GET';
 
 //handler business logic
-exports.handleRequest=function(req, res){
+exports.handleRequest=[handler];
+
+function handler(req, res){
 
     console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
 

@@ -1,20 +1,24 @@
 
 exports.express = require('express'); // call express
-exports.app=this.express(); // define our app using express
+var app=this.express();
+exports.app=app;
 
-exports.init=function(){
-
+exports.initBodyParser=function(){
     // configure app to use bodyParser()
     // this will let us get the data from a POST
     var bodyParser = require('body-parser');
-    this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
 
+}
+
+exports.initHeaders=function(){
     // Add headers
-    this.app.use(function (req, res, next) {
+    app.use(function (req, res, next) {
 
         // Website you wish to allow to connect
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+        res.setHeader('Access-Control-Allow-Origin', null); //allow origin for running jasmine test locally from file system
 
         // Request methods you wish to allow
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -34,14 +38,38 @@ exports.init=function(){
     });
 }
 
-exports.startStaticFilesServer = function() {
+exports.initStaticFilesListener = function() {
     var appFolder = __dirname + '/../app';
 
     console.log('starting file server on:' + appFolder);
-    this.app.use(this.express.static(appFolder));
+    app.use(this.express.static(appFolder));
+
+    //this.app.use(this.express.session({ secret: 'keyboard cat' }));
 }
 
 exports.startRestApi = function(router) {
     // all of our routes will be prefixed with /api
-    this.app.use('/api', router);
+    app.use('/api', router);
+}
+
+exports.initCookiesParser=function(){
+    var cookieParser = require('cookie-parser')
+    app.use(cookieParser())
+}
+
+exports.initSessions=function(){
+    var session = require('express-session');
+    var uuid = require('node-uuid');
+    app.use(session({
+        genid: function(req) {
+            return uuid.v1(); // use UUIDs for session IDs
+        },
+        secret: 'keyboard cat'
+    }))
+}
+
+exports.initPassport=function(){
+    var passport=require('passport');
+    app.use(passport.initialize());
+    app.use(passport.session());
 }
