@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
@@ -19,7 +21,7 @@ var validateLocalStrategyProperty = function(property) {
 
 var validateAuthenticationKey=function(key){
     return key!=null;
-}
+};
 
 
 module.exports = function() {
@@ -65,7 +67,7 @@ module.exports = function() {
         created: {
             type: Date,
             default: Date.now
-        },
+        }
     });
 
     user.methods.isValid=function(){
@@ -77,7 +79,7 @@ module.exports = function() {
 
     user.methods.toString=function(){
         return this.firstName+" "+this.lastName+" "+this.email;
-    }
+    };
     registerModel(user);
 };
 

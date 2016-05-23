@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
@@ -65,7 +67,7 @@ module.exports = function() {
             encryptedPassword = crypto.pbkdf2Sync(decryptedPassword, salt, 10000, 64).toString('base64');
         }
         return encryptedPassword;
-    }
+    };
 
     authentication.methods.isDecryptedPasswordValid=function(decryptedPassword) {
         return (decryptedPassword && decryptedPassword.length > 6);
@@ -84,7 +86,7 @@ module.exports = function() {
 
     authentication.methods.toString=function(){
         return this.username;
-    }
+    };
 
     //Hook a pre save method to hash the password
     authentication.pre('save', function(next) {

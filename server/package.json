@@ -10,6 +10,9 @@
     "cookie-parser":"*",
     "body-parser":"*",
     "express-session":"*",
-    "node-uuid":"*"
+    "node-uuid":"*",
+    "activedirectory":"*",
+    "app-module-path":"*",
+    "connect-flash":"*"
   }
 }

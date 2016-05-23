@@ -10,7 +10,7 @@ exports.initBodyParser=function(){
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-}
+};
 
 exports.initHeaders=function(){
     // Add headers
@@ -36,7 +36,7 @@ exports.initHeaders=function(){
         // Pass to next layer of middleware
         next();
     });
-}
+};
 
 exports.initStaticFilesListener = function() {
     var appFolder = __dirname + '/../app';
@@ -45,17 +45,17 @@ exports.initStaticFilesListener = function() {
     app.use(this.express.static(appFolder));
 
     //this.app.use(this.express.session({ secret: 'keyboard cat' }));
-}
+};
 
 exports.startRestApi = function(router) {
     // all of our routes will be prefixed with /api
     app.use('/api', router);
-}
+};
 
 exports.initCookiesParser=function(){
-    var cookieParser = require('cookie-parser')
-    app.use(cookieParser())
-}
+    var cookieParser = require('cookie-parser');
+    app.use(cookieParser());
+};
 
 exports.initSessions=function(){
     var session = require('express-session');
@@ -65,11 +65,35 @@ exports.initSessions=function(){
             return uuid.v1(); // use UUIDs for session IDs
         },
         secret: 'keyboard cat'
-    }))
-}
+    }));
+};
 
 exports.initPassport=function(){
     var passport=require('passport');
     app.use(passport.initialize());
     app.use(passport.session());
-}
+
+    //required for passport when using express 3.x
+    var flash = require('connect-flash');
+    app.use(flash());
+
+    /* loads different authentication service strategies */
+
+    var authService=require('services/activeDirectoryAuthenticationService');
+    //var authService=require('services/localDatabaseAuthenticationService');
+    console.log('initializing authentication service:' + authService.name());
+
+    var strategy = require('passport-local').Strategy;
+
+    passport.use(new strategy(authService.authenticate));
+
+    passport.serializeUser(function(user, done) {
+        console.log("serializing user data %s",user.id);
+        done(null, user.id);
+    });
+
+    passport.deserializeUser(function(id, done) {
+        console.log("deserializing user data");
+        done(null, null);
+    });
+};
