@@ -1,17 +1,21 @@
 /// <reference path="../node.d.ts" />
-//import fs=module("fs");
-var fs = require('fs');
+
+import * as fs from 'fs'
+
 //the url path to be used for this handler
-exports.path = '/readme';
+export const path='/readme';
+
 //the http verb to be used for this handler
-exports.verb = 'GET';
+export const verb='GET';
+
 //handler business logic
-exports.handleRequest = [handler];
-function handler(req, res) {
+export const handleRequest=[handler];
+
+function handler(req, res){
+
     console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
-    var readmeFile = process.cwd() + '/../README.md';
-    //    var fs = require('fs');
+
+    var readmeFile = process.cwd() +'/../README.md';
     var fileContent = fs.readFileSync(readmeFile, 'utf8');
     res.json({ message: fileContent });
 }
-//# sourceMappingURL=apiGetReadmeHandler.js.map
