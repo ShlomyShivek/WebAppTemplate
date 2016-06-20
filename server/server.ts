@@ -62,6 +62,6 @@ httpListener.startRestApi(expressRouter);
 
 // START THE SERVER
 // =============================================================================
-var port = process.env.PORT || 8082; 		// set our port
+var port = process.env.PORT || 8081; 		// set our port
 httpListener.app.listen(port);
 console.log('Server starts listening on port ' + port);

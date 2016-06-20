@@ -1,6 +1,3 @@
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 function toJson(errorCode, message) {
     return {
         err: errorCode,
@@ -8,6 +5,9 @@ function toJson(errorCode, message) {
     };
 }
 exports.toJson = toJson;
-__export(require("./apiErrorCodes"));
-__export(require("./servicesErrorCodes"));
+;
+var apiErrorCodes_1 = require("./apiErrorCodes");
+exports.ApiErrorCodes = apiErrorCodes_1.ApiErrorCodes;
+var servicesErrorCodes_1 = require("./servicesErrorCodes");
+exports.ServicesErrorCodes = servicesErrorCodes_1.ServiceErrorCodes;
 //# sourceMappingURL=errorCodes.js.map

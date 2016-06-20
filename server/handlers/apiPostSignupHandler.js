@@ -1,5 +1,6 @@
 var errorHandling = require('../models/errorCodes/errorCodes');
-//'use strict';
+var userManagementService = require('../services/usersManagementService');
+var dbModel = require('../dbModelsInitiator');
 //the url path to be used for this handler
 exports.path = '/signup';
 //the http verb to be used for this handler
@@ -8,9 +9,6 @@ exports.verb = 'POST';
 exports.handleRequest = [handler];
 function handler(req, res) {
     console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
-    var userManagementService = require('services/usersManagementService');
-    //var errorCodes = require('models/errorCodes/errorCodes');
-    var dbModel = require('dbModelsInitiator');
     var userModel = dbModel.getDbModel('user');
     var authModel = dbModel.getDbModel('authentication');
     var user = new userModel(req.body.registration);
@@ -38,7 +36,6 @@ function handler(req, res) {
         }
         else {
             console.log('invalid username or password');
-            //res.status(400).json(errorCodes.toJson(errorCodes.ApiErrorCodes.MissingData,'invalid username or password'));
             res.status(400).json(errorHandling.toJson(errorHandling.ApiErrorCodes.MissingData, 'invalid username or password'));
         }
     }

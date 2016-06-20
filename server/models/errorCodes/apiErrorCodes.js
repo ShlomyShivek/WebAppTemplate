@@ -4,9 +4,4 @@
     ApiErrorCodes[ApiErrorCodes["UserAlreadyExists"] = 101] = "UserAlreadyExists";
 })(exports.ApiErrorCodes || (exports.ApiErrorCodes = {}));
 var ApiErrorCodes = exports.ApiErrorCodes;
-/*
-ApiErrorCodes={
-};
-module.exports=ApiErrorCodes;
-    */ 
 //# sourceMappingURL=apiErrorCodes.js.map

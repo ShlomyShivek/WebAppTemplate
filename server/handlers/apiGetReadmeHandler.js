@@ -11,7 +11,8 @@ function handler(req, res){
 
     console.log('handling ' + JSON.stringify(req.route.methods) + ' ' + req.originalUrl + ' from:' + req.header('referer'));
 
+    var readmeFile = process.cwd() +'/../README.md';
     var fs = require('fs');
-    var fileContent = fs.readFileSync('../ReadMe.md', 'utf8');
+    var fileContent = fs.readFileSync(readmeFile, 'utf8');
     res.json({ message: fileContent });
 }

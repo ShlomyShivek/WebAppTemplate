@@ -3,8 +3,3 @@ export enum ApiErrorCodes {
     MissingData = 100,
     UserAlreadyExists = 101
 }
-/*
-ApiErrorCodes={
-};
-module.exports=ApiErrorCodes;
-    */

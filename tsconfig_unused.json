@@ -1,0 +1,10 @@
+//This file is not being used while running from WebStorm.
+//WebStorm has its own internal settings for TypeScript compilation
+
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "sourceMap": true
+
+    }
+}
